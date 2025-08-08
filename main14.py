@@ -1187,7 +1187,16 @@ class ANSESDownloaderPro:
             text_color="#E0E7FF"
         )
         subtitle_label.pack()
-        
+
+        # Interruptor de tema para cambiar entre modo oscuro y claro
+        self.theme_switch = ctk.CTkSwitch(
+            title_frame,
+            text="Modo oscuro",
+            command=self.toggle_theme
+        )
+        self.theme_switch.select()
+        self.theme_switch.place(relx=1, x=-10, y=10, anchor="ne")
+
         # Scrollable frame para configuración
         config_scroll = ctk.CTkScrollableFrame(parent, height=500)
         config_scroll.pack(fill="both", expand=True, padx=15, pady=(0, 15))
@@ -1231,7 +1240,16 @@ class ANSESDownloaderPro:
             text_color=["#059669", "#10B981"]
         )
         info_label.pack(pady=(0, 15))
-    
+
+    def toggle_theme(self):
+        """Alterna entre modo claro y oscuro"""
+        if self.theme_switch.get():
+            ctk.set_appearance_mode("dark")
+            self.theme_switch.configure(text="Modo oscuro")
+        else:
+            ctk.set_appearance_mode("light")
+            self.theme_switch.configure(text="Modo claro")
+
     def create_section(self, parent, title, fields):
         # Frame de sección con estilo
         section_frame = ctk.CTkFrame(parent, fg_color=["#F8FAFC", "#1E293B"])
