@@ -43,6 +43,18 @@ class ANSESDownloaderPro:
         self.root.title("Descargador de Recibos de Anses")
         self.root.geometry("1200x800")
         self.root.resizable(True, True)
+
+        # Paleta de colores y tipografías para estilo jurídico
+        self.colors = {
+            "primary": "#1B263B",   # Azul corporativo
+            "dark": "#0D1B2A",      # Azul oscuro
+            "accent": "#B8860B",    # Dorado
+            "light_bg": "#F5F5F4"   # Fondo claro
+        }
+        self.font_title = ctk.CTkFont(family="Georgia", size=20, weight="bold")
+        self.font_section = ctk.CTkFont(family="Georgia", size=16, weight="bold")
+        self.font_subtitle = ctk.CTkFont(family="Georgia", size=12)
+        self.root.configure(fg_color=[self.colors["light_bg"], self.colors["dark"]])
         
         # Variables
         self.driver = None
@@ -764,26 +776,27 @@ class ANSESDownloaderPro:
         
         self.setup_left_panel(left_panel)
         self.setup_right_panel(right_panel)
+        self.create_status_bar()
     
     def setup_left_panel(self, parent):
-        # Título principal con gradiente simulado
-        title_frame = ctk.CTkFrame(parent, height=80, fg_color=["#2B5CE6", "#1E40AF"])
+        # Encabezado corporativo
+        title_frame = ctk.CTkFrame(parent, height=90, fg_color=[self.colors["primary"], self.colors["dark"]])
         title_frame.pack(fill="x", padx=15, pady=(15, 20))
         title_frame.pack_propagate(False)
-        
+
         title_label = ctk.CTkLabel(
             title_frame,
-            text="🏛️ Descargador recibos de ANSES",
-            font=ctk.CTkFont(size=20, weight="bold"),
+            text="⚖️ Estudio Jurídico - ANSES",
+            font=self.font_title,
             text_color="white"
         )
         title_label.pack(expand=True)
-        
+
         subtitle_label = ctk.CTkLabel(
             title_frame,
-            text="Automatización Profesional de Recibos",
-            font=ctk.CTkFont(size=12),
-            text_color="#E0E7FF"
+            text="Gestión profesional de recibos",
+            font=self.font_subtitle,
+            text_color=self.colors["accent"]
         )
         subtitle_label.pack()
 
@@ -821,22 +834,22 @@ class ANSESDownloaderPro:
     
     def create_license_info(self, parent):
         """Muestra información de la licencia"""
-        license_frame = ctk.CTkFrame(parent, fg_color=["#F0FDF4", "#1F2937"])
+        license_frame = ctk.CTkFrame(parent, fg_color=[self.colors["light_bg"], self.colors["primary"]])
         license_frame.pack(fill="x", pady=(0, 15))
         
         title_label = ctk.CTkLabel(
             license_frame,
             text="🔐 INFORMACIÓN DE LICENCIA",
-            font=ctk.CTkFont(size=16, weight="bold"),
-            text_color=["#059669", "#10B981"]
+            font=self.font_section,
+            text_color=[self.colors["primary"], self.colors["accent"]]
         )
         title_label.pack(pady=(15, 10))
         
         info_label = ctk.CTkLabel(
             license_frame,
             text=f"✅ Máquina autorizada\n🆔 ID: {self.license_manager.machine_id[:32]}...",
-            font=ctk.CTkFont(size=12),
-            text_color=["#059669", "#10B981"]
+            font=self.font_subtitle,
+            text_color=[self.colors["primary"], self.colors["accent"]]
         )
         info_label.pack(pady=(0, 15))
 
@@ -851,15 +864,15 @@ class ANSESDownloaderPro:
 
     def create_section(self, parent, title, fields):
         # Frame de sección con estilo
-        section_frame = ctk.CTkFrame(parent, fg_color=["#F8FAFC", "#1E293B"])
+        section_frame = ctk.CTkFrame(parent, fg_color=[self.colors["light_bg"], self.colors["primary"]])
         section_frame.pack(fill="x", pady=(0, 15))
         
         # Título de sección
         title_label = ctk.CTkLabel(
             section_frame,
             text=title,
-            font=ctk.CTkFont(size=16, weight="bold"),
-            text_color=["#1E40AF", "#60A5FA"]
+            font=self.font_section,
+            text_color=[self.colors["primary"], self.colors["accent"]]
         )
         title_label.pack(pady=(15, 10))
         
@@ -871,7 +884,7 @@ class ANSESDownloaderPro:
             label = ctk.CTkLabel(
                 field_frame,
                 text=field[0],
-                font=ctk.CTkFont(size=12, weight="bold"),
+                font=ctk.CTkFont(family="Georgia", size=12, weight="bold"),
                 anchor="w"
             )
             label.pack(anchor="w", pady=(5, 2))
@@ -895,14 +908,14 @@ class ANSESDownloaderPro:
         ctk.CTkLabel(section_frame, text="", height=10).pack()
     
     def create_date_section(self, parent):
-        section_frame = ctk.CTkFrame(parent, fg_color=["#F8FAFC", "#1E293B"])
+        section_frame = ctk.CTkFrame(parent, fg_color=[self.colors["light_bg"], self.colors["primary"]])
         section_frame.pack(fill="x", pady=(0, 15))
-        
+
         title_label = ctk.CTkLabel(
             section_frame,
-            text="📅 RANGO DE FECHAS",
-            font=ctk.CTkFont(size=16, weight="bold"),
-            text_color=["#1E40AF", "#60A5FA"]
+            text="🗓️ RANGO DE FECHAS",
+            font=self.font_section,
+            text_color=[self.colors["primary"], self.colors["accent"]]
         )
         title_label.pack(pady=(15, 10))
         
@@ -913,7 +926,7 @@ class ANSESDownloaderPro:
         ctk.CTkLabel(
             fecha_inicial_frame,
             text="Desde:",
-            font=ctk.CTkFont(size=12, weight="bold")
+            font=ctk.CTkFont(family="Georgia", size=12, weight="bold")
         ).pack(anchor="w", pady=(5, 2))
         
         fecha_inicial_inputs = ctk.CTkFrame(fecha_inicial_frame, fg_color="transparent")
@@ -924,7 +937,7 @@ class ANSESDownloaderPro:
             placeholder_text="MM",
             width=80,
             height=35,
-            font=ctk.CTkFont(size=12)
+            font=ctk.CTkFont(family="Georgia", size=12)
         )
         self.mes_inicial_entry.pack(side="left", padx=(0, 10))
         self.mes_inicial_entry.insert(0, "6")
@@ -936,7 +949,7 @@ class ANSESDownloaderPro:
             placeholder_text="AAAA",
             width=100,
             height=35,
-            font=ctk.CTkFont(size=12)
+            font=ctk.CTkFont(family="Georgia", size=12)
         )
         self.anio_inicial_entry.pack(side="left", padx=(10, 0))
         self.anio_inicial_entry.insert(0, "2024")
@@ -948,7 +961,7 @@ class ANSESDownloaderPro:
         ctk.CTkLabel(
             fecha_final_frame,
             text="Hasta:",
-            font=ctk.CTkFont(size=12, weight="bold")
+            font=ctk.CTkFont(family="Georgia", size=12, weight="bold")
         ).pack(anchor="w", pady=(5, 2))
         
         fecha_final_inputs = ctk.CTkFrame(fecha_final_frame, fg_color="transparent")
@@ -959,7 +972,7 @@ class ANSESDownloaderPro:
             placeholder_text="MM",
             width=80,
             height=35,
-            font=ctk.CTkFont(size=12)
+            font=ctk.CTkFont(family="Georgia", size=12)
         )
         self.mes_final_entry.pack(side="left", padx=(0, 10))
         self.mes_final_entry.insert(0, "11")
@@ -971,7 +984,7 @@ class ANSESDownloaderPro:
             placeholder_text="AAAA",
             width=100,
             height=35,
-            font=ctk.CTkFont(size=12)
+            font=ctk.CTkFont(family="Georgia", size=12)
         )
         self.anio_final_entry.pack(side="left", padx=(10, 0))
         self.anio_final_entry.insert(0, "2024")
@@ -979,14 +992,14 @@ class ANSESDownloaderPro:
         ctk.CTkLabel(section_frame, text="", height=10).pack()
     
     def create_folder_section(self, parent):
-        section_frame = ctk.CTkFrame(parent, fg_color=["#F8FAFC", "#1E293B"])
+        section_frame = ctk.CTkFrame(parent, fg_color=[self.colors["light_bg"], self.colors["primary"]])
         section_frame.pack(fill="x", pady=(0, 15))
-        
+
         title_label = ctk.CTkLabel(
             section_frame,
             text="📁 CARPETA DE DESCARGA",
-            font=ctk.CTkFont(size=16, weight="bold"),
-            text_color=["#1E40AF", "#60A5FA"]
+            font=self.font_section,
+            text_color=[self.colors["primary"], self.colors["accent"]]
         )
         title_label.pack(pady=(15, 10))
         
@@ -997,7 +1010,7 @@ class ANSESDownloaderPro:
             folder_frame,
             placeholder_text="Selecciona la carpeta de descarga",
             height=35,
-            font=ctk.CTkFont(size=12)
+            font=ctk.CTkFont(family="Georgia", size=12)
         )
         self.carpeta_entry.pack(side="left", fill="x", expand=True, padx=(0, 10))
         self.carpeta_entry.insert(0, os.path.join(os.getcwd(), "recibos_descargados"))
@@ -1008,7 +1021,7 @@ class ANSESDownloaderPro:
             width=50,
             height=35,
             command=self.seleccionar_carpeta,
-            font=ctk.CTkFont(size=16)
+            font=ctk.CTkFont(family="Georgia", size=16)
         )
         folder_btn.pack(side="right")
     
@@ -1021,10 +1034,10 @@ class ANSESDownloaderPro:
         self.start_btn = ctk.CTkButton(
             buttons_frame,
             text="🚀 INICIAR DESCARGA",
-            font=ctk.CTkFont(size=16, weight="bold"),
+            font=self.font_section,
             height=50,
-            fg_color=["#10B981", "#059669"],
-            hover_color=["#059669", "#047857"],
+            fg_color=[self.colors["accent"], "#8B6508"],
+            hover_color=["#8B6508", "#704C0A"],
             command=self.toggle_descarga
         )
         self.start_btn.pack(fill="x", pady=(0, 10))
@@ -1033,7 +1046,7 @@ class ANSESDownloaderPro:
         self.pdf_btn = ctk.CTkButton(
             buttons_frame,
             text="📄 PDF NO DISPONIBLE",
-            font=ctk.CTkFont(size=14, weight="bold"),
+            font=ctk.CTkFont(family="Georgia", size=14, weight="bold"),
             height=45,
             fg_color=["#6B7280", "#4B5563"],  # Gris deshabilitado
             hover_color=["#6B7280", "#4B5563"],
@@ -1046,7 +1059,7 @@ class ANSESDownloaderPro:
         self.excel_btn = ctk.CTkButton(
             buttons_frame,
             text="📊 EXCEL NO DISPONIBLE",
-            font=ctk.CTkFont(size=14, weight="bold"),
+            font=ctk.CTkFont(family="Georgia", size=14, weight="bold"),
             height=45,
             fg_color=["#6B7280", "#4B5563"],  # Gris deshabilitado
             hover_color=["#6B7280", "#4B5563"],
@@ -1059,14 +1072,14 @@ class ANSESDownloaderPro:
         # Título del panel derecho
         right_title = ctk.CTkLabel(
             parent,
-            text="📊 MONITOR DEL SISTEMA",
-            font=ctk.CTkFont(size=18, weight="bold"),
-            text_color=["#1E40AF", "#60A5FA"]
+            text="📊 MONITOR LEGAL",
+            font=self.font_section,
+            text_color=[self.colors["primary"], self.colors["accent"]]
         )
         right_title.pack(pady=(15, 10))
-        
+
         # Frame de estadísticas
-        stats_frame = ctk.CTkFrame(parent, height=80, fg_color=["#EFF6FF", "#1E293B"])
+        stats_frame = ctk.CTkFrame(parent, height=80, fg_color=[self.colors["light_bg"], self.colors["primary"]])
         stats_frame.pack(fill="x", padx=15, pady=(0, 15))
         stats_frame.pack_propagate(False)
         
@@ -1088,59 +1101,59 @@ class ANSESDownloaderPro:
             ctk.CTkLabel(
                 stat_frame,
                 text=label,
-                font=ctk.CTkFont(size=11, weight="bold"),
-                text_color=["#6B7280", "#9CA3AF"]
+                font=ctk.CTkFont(family="Georgia", size=11, weight="bold"),
+                text_color=[self.colors["primary"], self.colors["accent"]]
             ).pack()
-            
+
             value_label = ctk.CTkLabel(
                 stat_frame,
                 text=value,
-                font=ctk.CTkFont(size=14, weight="bold"),
-                text_color=["#1F2937", "#F9FAFB"]
+                font=ctk.CTkFont(family="Georgia", size=14, weight="bold"),
+                text_color=[self.colors["dark"], self.colors["light_bg"]]
             )
             value_label.pack()
             self.stats_labels[key] = value_label
         
         # Barra de progreso mejorada
-        progress_frame = ctk.CTkFrame(parent, fg_color=["#F8FAFC", "#1E293B"])
+        progress_frame = ctk.CTkFrame(parent, fg_color=[self.colors["light_bg"], self.colors["primary"]])
         progress_frame.pack(fill="x", padx=15, pady=(0, 15))
-        
+
         ctk.CTkLabel(
             progress_frame,
             text="⚡ PROGRESO DE DESCARGA",
-            font=ctk.CTkFont(size=14, weight="bold"),
-            text_color=["#1E40AF", "#60A5FA"]
+            font=self.font_section,
+            text_color=[self.colors["primary"], self.colors["accent"]]
         ).pack(pady=(15, 5))
         
         self.progress_bar = ctk.CTkProgressBar(
             progress_frame,
             height=20,
-            progress_color=["#10B981", "#059669"]
+            progress_color=[self.colors["accent"], self.colors["accent"]]
         )
         self.progress_bar.pack(fill="x", padx=20, pady=(0, 10))
         self.progress_bar.set(0)
-        
+
         self.progress_label = ctk.CTkLabel(
             progress_frame,
             text="0 / 0 recibos procesados",
-            font=ctk.CTkFont(size=12),
-            text_color=["#6B7280", "#9CA3AF"]
+            font=self.font_subtitle,
+            text_color=[self.colors["dark"], self.colors["light_bg"]]
         )
         self.progress_label.pack(pady=(0, 15))
-        
+
         # Consola profesional
-        console_frame = ctk.CTkFrame(parent, fg_color=["#F8FAFC", "#1E293B"])
+        console_frame = ctk.CTkFrame(parent, fg_color=[self.colors["light_bg"], self.colors["primary"]])
         console_frame.pack(fill="both", expand=True, padx=15, pady=(0, 15))
-        
-        console_header = ctk.CTkFrame(console_frame, height=40, fg_color=["#1F2937", "#111827"])
+
+        console_header = ctk.CTkFrame(console_frame, height=40, fg_color=[self.colors["dark"], self.colors["dark"]])
         console_header.pack(fill="x", padx=2, pady=(2, 0))
         console_header.pack_propagate(False)
-        
+
         ctk.CTkLabel(
             console_header,
-            text="💻 CONSOLA DEL SISTEMA",
-            font=ctk.CTkFont(size=12, weight="bold"),
-            text_color="#00FF00"
+            text="💻 CONSOLA LEGAL",
+            font=ctk.CTkFont(family="Georgia", size=12, weight="bold"),
+            text_color=self.colors["accent"]
         ).pack(side="left", padx=15, pady=10)
         
         # Botón para limpiar consola
@@ -1167,7 +1180,19 @@ class ANSESDownloaderPro:
         # Mensaje inicial
         self.console.log("Sistema iniciado correctamente", "success")
         self.console.log("Esperando configuración del usuario...", "info")
-    
+
+    def create_status_bar(self):
+        """Barra inferior con información corporativa"""
+        status_frame = ctk.CTkFrame(self.root, height=30, fg_color=[self.colors["primary"], self.colors["dark"]])
+        status_frame.pack(side="bottom", fill="x")
+        status_frame.pack_propagate(False)
+        ctk.CTkLabel(
+            status_frame,
+            text="© 2024 Estudio Jurídico",
+            font=self.font_subtitle,
+            text_color="white"
+        ).pack(pady=5)
+
     def clear_console(self):
         self.console.delete("1.0", "end")
         self.console.log("Consola limpiada", "info")
