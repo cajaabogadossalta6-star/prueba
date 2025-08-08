@@ -33,11 +33,6 @@ services:
           type: redis
           name: redis
           property: connectionString
-  - type: static
+  - type: web
     name: frontend
-    rootDir: frontend
-    buildCommand: npm install && npm run build
-    staticPublishPath: dist
-  - type: redis
-    name: redis
-    ipAllowList: []
+    runtime: static
