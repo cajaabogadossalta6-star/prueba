@@ -7,9 +7,9 @@ class ConsoleWidget(ctk.CTkTextbox):
         super().__init__(parent, **kwargs)
         self.configure(
             font=ctk.CTkFont(family="Consolas", size=12),
-            text_color="#00FF00",
-            fg_color="#1a1a1a",
-            border_color="#333333",
+            text_color="#E5E7EB",
+            fg_color="#111827",
+            border_color="#374151",
             border_width=2
         )
         self.log_count = 0
@@ -19,18 +19,20 @@ class ConsoleWidget(ctk.CTkTextbox):
         self.log_count += 1
 
         color_map = {
-            "info": "#00FF00",
-            "warning": "#FFA500",
-            "error": "#FF4444",
-            "success": "#00FF88",
-            "process": "#00AAFF"
+            "info": "#F8FAFC",
+            "warning": "#FBBF24",
+            "error": "#F87171",
+            "success": "#34D399",
+            "process": "#60A5FA"
         }
 
-        color = color_map.get(tipo, "#00FF00")
+        color = color_map.get(tipo, "#F8FAFC")
 
         line = f"[{timestamp}] [{self.log_count:03d}] {mensaje}\n"
+        tag = f"log_{self.log_count}"
 
-        self.insert("end", line)
+        self.insert("end", line, tag)
+        self.tag_config(tag, foreground=color)
         self.see("end")
 
         lines = self.get("1.0", "end").split('\n')

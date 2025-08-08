@@ -766,24 +766,24 @@ class ANSESDownloaderPro:
         self.setup_right_panel(right_panel)
     
     def setup_left_panel(self, parent):
-        # Título principal con gradiente simulado
-        title_frame = ctk.CTkFrame(parent, height=80, fg_color=["#2B5CE6", "#1E40AF"])
+        # Título principal con estilo corporativo
+        title_frame = ctk.CTkFrame(parent, height=80, fg_color=["#1E3A8A", "#0F172A"])
         title_frame.pack(fill="x", padx=15, pady=(15, 20))
         title_frame.pack_propagate(False)
-        
+
         title_label = ctk.CTkLabel(
             title_frame,
-            text="🏛️ Descargador recibos de ANSES",
+            text="⚖️ Sistema Legal de Recibos",
             font=ctk.CTkFont(size=20, weight="bold"),
             text_color="white"
         )
         title_label.pack(expand=True)
-        
+
         subtitle_label = ctk.CTkLabel(
             title_frame,
-            text="Automatización Profesional de Recibos",
+            text="Gestión Profesional para Estudios Jurídicos",
             font=ctk.CTkFont(size=12),
-            text_color="#E0E7FF"
+            text_color="#D1D5DB"
         )
         subtitle_label.pack()
 
@@ -859,7 +859,7 @@ class ANSESDownloaderPro:
             section_frame,
             text=title,
             font=ctk.CTkFont(size=16, weight="bold"),
-            text_color=["#1E40AF", "#60A5FA"]
+            text_color=["#1E3A8A", "#93C5FD"]
         )
         title_label.pack(pady=(15, 10))
         
@@ -902,7 +902,7 @@ class ANSESDownloaderPro:
             section_frame,
             text="📅 RANGO DE FECHAS",
             font=ctk.CTkFont(size=16, weight="bold"),
-            text_color=["#1E40AF", "#60A5FA"]
+            text_color=["#1E3A8A", "#93C5FD"]
         )
         title_label.pack(pady=(15, 10))
         
@@ -986,7 +986,7 @@ class ANSESDownloaderPro:
             section_frame,
             text="📁 CARPETA DE DESCARGA",
             font=ctk.CTkFont(size=16, weight="bold"),
-            text_color=["#1E40AF", "#60A5FA"]
+            text_color=["#1E3A8A", "#93C5FD"]
         )
         title_label.pack(pady=(15, 10))
         
@@ -1059,9 +1059,9 @@ class ANSESDownloaderPro:
         # Título del panel derecho
         right_title = ctk.CTkLabel(
             parent,
-            text="📊 MONITOR DEL SISTEMA",
+            text="Panel de Monitoreo",
             font=ctk.CTkFont(size=18, weight="bold"),
-            text_color=["#1E40AF", "#60A5FA"]
+            text_color=["#1E3A8A", "#93C5FD"]
         )
         right_title.pack(pady=(15, 10))
         
@@ -1109,7 +1109,7 @@ class ANSESDownloaderPro:
             progress_frame,
             text="⚡ PROGRESO DE DESCARGA",
             font=ctk.CTkFont(size=14, weight="bold"),
-            text_color=["#1E40AF", "#60A5FA"]
+            text_color=["#1E3A8A", "#93C5FD"]
         ).pack(pady=(15, 5))
         
         self.progress_bar = ctk.CTkProgressBar(
@@ -1138,9 +1138,9 @@ class ANSESDownloaderPro:
         
         ctk.CTkLabel(
             console_header,
-            text="💻 CONSOLA DEL SISTEMA",
+            text="Consola del Sistema",
             font=ctk.CTkFont(size=12, weight="bold"),
-            text_color="#00FF00"
+            text_color="#D1D5DB"
         ).pack(side="left", padx=15, pady=10)
         
         # Botón para limpiar consola
