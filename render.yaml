@@ -8,12 +8,12 @@ services:
     envVars:
       - key: CELERY_BROKER_URL
         fromService:
-          type: redis
+          type: keyvalue
           name: redis
           property: connectionString
       - key: CELERY_RESULT_BACKEND
         fromService:
-          type: redis
+          type: keyvalue
           name: redis
           property: connectionString
   - type: worker
@@ -25,12 +25,12 @@ services:
     envVars:
       - key: CELERY_BROKER_URL
         fromService:
-          type: redis
+          type: keyvalue
           name: redis
           property: connectionString
       - key: CELERY_RESULT_BACKEND
         fromService:
-          type: redis
+          type: keyvalue
           name: redis
           property: connectionString
   - type: web
@@ -39,6 +39,7 @@ services:
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
-  - type: redis
+  - type: keyvalue
     name: redis
+    plan: free
     ipAllowList: []
