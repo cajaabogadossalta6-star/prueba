@@ -1,0 +1,64 @@
+.container {
+  max-width: 420px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #2e2e2e;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+input {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #555;
+  background: #1a1a1a;
+  color: #fff;
+}
+
+button {
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  border: none;
+  background-color: #646cff;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #535bf2;
+}
+
+.error {
+  color: #ff6b6b;
+}
+
+.progress {
+  position: relative;
+  background: #444;
+  border-radius: 4px;
+  height: 20px;
+  margin-top: 1rem;
+}
+
+.bar {
+  background: #4caf50;
+  height: 100%;
+  border-radius: 4px 0 0 4px;
+  transition: width 0.3s ease;
+}
+
+.progress span {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  line-height: 20px;
+}
